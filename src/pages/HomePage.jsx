@@ -9,7 +9,21 @@ import { Controls } from "../components/Controls";
 
 export const HomePage = ({ countries, setCountries }) => {
 
-    // const [countries, setCountries] = useState([]);
+    const [filteredCountries, setFilteredCountries] = useState(countries);
+
+    const handleSearch = (search, region) => {
+        let data = [...countries]
+
+        if (region) {
+            data = data.filter(country => country.region.includes(region));
+        }
+
+        if (search) {
+            data = data.filter(country => country.name.toLowerCase().includes(search.toLowerCase()));
+        }
+
+        setFilteredCountries(data);
+    }
 
     const navigate = useNavigate();
 
@@ -19,11 +33,17 @@ export const HomePage = ({ countries, setCountries }) => {
                 .then(({ data }) => setCountries(data));
     }, []);
 
+    useEffect(() => {
+        handleSearch();
+
+        // eslint-disable-next-line
+    }, [countries]);
+
     return (
         <>
-            <Controls />
+            <Controls onSearch={handleSearch} />
             <CountriesList>
-                {countries.map(country => {
+                {filteredCountries.map(country => {
                     const countryInfo = {
                         img: country.flags.png,
                         name: country.name,
