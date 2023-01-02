@@ -3,10 +3,12 @@ import {configureStore} from '@reduxjs/toolkit';
 
 import * as api from './config';
 import { themeReducer } from "./features/theme/themeSlice";
+import { controlsReducer } from "./features/controls/controlsSlice";
 
 export const store = configureStore({
     reducer: {
         theme: themeReducer,
+        controls: controlsReducer,
     },
     devTools: true,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
@@ -18,4 +20,4 @@ export const store = configureStore({
         },
         serializableCheck: false,
     })
-})
+});
