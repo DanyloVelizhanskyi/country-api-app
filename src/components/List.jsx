@@ -19,7 +19,7 @@ const Wrapper = styled.section`
     }
 `;
 
-export const CountriesList = ({ children }) => {
+export const List = ({ children }) => {
     return (
         <Wrapper>
             {children}
