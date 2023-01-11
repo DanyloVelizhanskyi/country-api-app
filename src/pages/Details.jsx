@@ -1,10 +1,7 @@
-import axios from 'axios';
-import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { IoArrowBack } from 'react-icons/io5';
-import { searchByCountry } from '../config';
 import { Button } from '../components/Button';
-import { CountryInfo } from '../components/CountryInfo';
+import { CountryDetails } from '../features/countryDetails/CountryDetails';
 
 export const Details = () => {
 
@@ -14,11 +11,9 @@ export const Details = () => {
     return (
         <div>
             <Button onClick={() => navigate(-1)}>
-                <IoArrowBack /> Back
+                <IoArrowBack /> Back to main
             </Button>
-            {country && (
-                <CountryInfo push={navigate} {...country} />
-            )}
+            <CountryDetails name={name} navigate={navigate} />
         </div>
     )
 };

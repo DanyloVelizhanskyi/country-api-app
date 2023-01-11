@@ -1,7 +1,5 @@
 import styled from "styled-components";
-import axios from "axios";
-import { useState, useEffect } from 'react';
-import { filterByCode } from "../config";
+import { useCountryNeighbors } from "./useCountryNeighbors";
 
 const Wrapper = styled.section`
     margin-top: 3rem;
@@ -106,12 +104,7 @@ export const CountryInfo = (props) => {
         push,
     } = props;
 
-    const [neighbors, setNeighbors] = useState([]);
-
-    useEffect(() => {
-        if (borders.length)
-            axios.get(filterByCode(borders)).then(({ data }) => setNeighbors(data.map(country => country.name)));
-    }, [borders]);
+    const neighbors = useCountryNeighbors(borders);
 
     return (
         <Wrapper>
@@ -155,4 +148,4 @@ export const CountryInfo = (props) => {
             </div>
         </Wrapper>
     )
-}
+};
